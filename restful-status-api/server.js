@@ -24,6 +24,9 @@ server.get('/api/v1/healthcheck/status',(req,res) => {
 })
 
 server.get('/api/v1/healthcheck/:category/:check/:health', (req,res) => {
+    if(!req.params.category.match(/^[a-zA-Z0-9_-]{1,64}$/)) return res.status(500).send("invalid");
+    if(!req.params.check.match(/^[a-zA-Z0-9_-]{1,64}$/)) return res.status(500).send("invalid");
+    if(!req.params.health.match(/^[0-9]{1,3}$/)) return res.status(500).send("invalid");
     let hc = healthchecks.find(hc => hc.category===req.params.category && hc.check===req.params.check);
     if(hc) {
         hc.health=parseInt(req.params.health);
