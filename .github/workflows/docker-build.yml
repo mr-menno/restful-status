@@ -27,7 +27,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v3
       with:
-        images: restful-status
+        images: ghcr.io/mr-menno/restful-status
         tags: |
             type=ref,event=branch
             type=ref,event=pr
