@@ -45,7 +45,7 @@ server.use(express.static(__dirname + '/../restful-status-app/build'));
 setInterval(() => {
     let timeNow = new Date().getTime();
     healthchecks.forEach(hc => {
-        if(timeNow - hc.lastUpdate > 10000) {
+        if(timeNow - hc.lastUpdate > parseInt((process.env.TIMEOUT||(60*60*24)))*1000) {
             hc.health=0;
         }
     })
